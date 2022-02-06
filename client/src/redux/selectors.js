@@ -1,0 +1,12 @@
+export const authSelector = (state) => state.AUTH
+export const usersSelector = (state) => state.USERS
+export const customersSelector = (state) => state.CUSTOMERS
+export const suppliersSelector = (state) => state.SUPPLIERS
+export const invoicesSelector = (state) => state.INVOICES
+export const purchasesSelector = (state) => state.PURCHASES
+export const purchaseCategoriesSelector = (state) => state.PURCHASE_CATEGORIES
+export const servicesSelector = (state) => state.SERVICES
+export const productsSelector = (state) => state.PRODUCTS
+export const dataServiceSelector = (state) => state.DATA_SERVICES
+export const quotesSelector = (state) => state.QUOTES
+export const transactionsSelector = (state) => state.TRANSACTIONS

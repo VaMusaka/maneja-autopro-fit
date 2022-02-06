@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Nixie+One&family=Russo+One&family=Text+Me+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+body::-webkit-scrollbar,
+.MuiAutocomplete-popper::-webkit-scrollbar,
+.ag-body-horizontal-scroll-viewport::-webkit-scrollbar
+{
+    height: 5px !important;
+    width: 5px !important;
+    background-color: #cccccc !important;
+}
+
+body::-webkit-scrollbar-thumb,
+.MuiAutocomplete-popper::-webkit-scrollbar-thumb,
+.ag-body-horizontal-scroll-viewport::-webkit-scrollbar-thumb
+{
+    background: #102C51 !important;
+}

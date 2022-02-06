@@ -1,0 +1,5 @@
+export const GET_USERS = 'GET_USERS'
+export const GET_USER = 'GET_USER'
+export const SET_USERS_ERRORS = 'SET_USERS_ERRORS'
+export const SET_USERS_LOADING = 'SET_USERS_LOADING'
+export const UPDATE_USERS_LAYOUT = 'UPDATE_USERS_LAYOUT'

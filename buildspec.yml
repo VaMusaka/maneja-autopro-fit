@@ -1,0 +1,44 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo updating ubuntu distro
+      - apt-get update
+      - echo Installing Node 14...
+      - curl -sL https://deb.nodesource.com/setup_14.x | bash -
+      - apt-get install -y nodejs
+      - echo Installing NPM...
+      - npm -v
+      - node -v
+      #- apt-get install -y build-essentials
+  pre_build:
+    commands:
+      - echo Installing...
+      - npm install -g yarn
+      - yarn install
+      - yarn -v 
+      - echo Installing Client dependencies
+      - cd ./client && yarn install 
+      - echo Installing Server Dependencies
+      - cd ../server && yarn install
+  build:
+    commands:
+      - echo Building Client
+      - cd ../client && yarn build  
+      - pwd
+      - ls -la       
+      - mkdir ../server/client
+      - mv -fv build ../server/client/build
+artifacts:
+  files:
+    - '**/*'
+    - 'server/client/build/**/*'
+    - 'server/client/build/static/**/*'
+    - '.ebextensions/**/*'
+  discard-paths: no
+  base-directory: 'server*'
+eb_codebuild_settings:
+  CodeBuildServiceRole: CodeBuild-APF-GarageManager
+  ComputeType: BUILD_GENERAL1_SMALL
+  Image: 'aws/codebuild/standard:5.0'
+  Timeout: 60
