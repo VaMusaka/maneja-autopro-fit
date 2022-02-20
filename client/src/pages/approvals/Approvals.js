@@ -165,7 +165,7 @@ const Approvals = () => {
     }
 
     const rows = approvals && approvals.length <= 15 ? approvals?.length : 15
-    const approvalsTableHeight = rows * 50 + 74
+    let approvalsTableHeight = rows * 42.3
 
     return (
         <DefaultLayout title={'Sales approvals'}>
@@ -237,7 +237,7 @@ const Approvals = () => {
                 <Box p={2} width={'100%'}>
                     <div
                         className="ag-theme-alpine"
-                        style={{ width: '100%', height: `${approvalsTableHeight}px` }}
+                        style={{ width: '100%', height: `${approvalsTableHeight + 160}px` }}
                     >
                         <AgGridReact
                             rowData={approvals}
