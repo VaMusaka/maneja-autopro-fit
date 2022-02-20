@@ -12,6 +12,7 @@ const DefaultLayout = ({ title, children }) => {
     useEffect(() => {
         const isOpen = windowWidth > 600
         setMobileOpen(isOpen)
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
