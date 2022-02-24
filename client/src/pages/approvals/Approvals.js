@@ -176,7 +176,9 @@ const Approvals = () => {
                             <Grid container>
                                 <Grid item xs={6}>
                                     <Box width={'100%'} style={centerStyle}>
-                                        <Typography variant={'h4'}>£ {salesTotal}</Typography>
+                                        <Typography variant={'h4'}>
+                                            £ {salesTotal?.toFixed(2)}
+                                        </Typography>
                                         <Typography variant={'overline'}>
                                             New Sales Total
                                         </Typography>
@@ -192,7 +194,9 @@ const Approvals = () => {
                                             justifyContent: 'center',
                                         }}
                                     >
-                                        <Typography variant={'h4'}>£ {purchasesTotal}</Typography>
+                                        <Typography variant={'h4'}>
+                                            £ {purchasesTotal?.toFixed(2)}
+                                        </Typography>
                                         <Typography variant={'overline'}>
                                             Purchases Total
                                         </Typography>
