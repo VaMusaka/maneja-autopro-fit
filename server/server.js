@@ -7,6 +7,8 @@ const compression = require('compression')
 const methodOverride = require('method-override')
 const helmet = require('helmet')
 const featurePolicy = require('feature-policy')
+const Sentry = require("@sentry/node");
+
 const DOTENV = require('dotenv')
 const morgan = require('morgan')
 
@@ -14,6 +16,9 @@ const app = express()
 const { expectCt } = helmet
 
 DOTENV.config()
+
+const {SENTRY_DNS} = process.env
+Sentry.init({ dsn: SENTRY_DNS });
 
 // CONFIGURE AND CONNECT TO MongoDB
 require('./src/db')
@@ -79,6 +84,8 @@ app.use('/api/transactions', transactions)
 app.use('/api/ping', (req, res) => {
     res.send('Connection Established')
 })
+
+app.use(Sentry.Handlers.errorHandler());
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
