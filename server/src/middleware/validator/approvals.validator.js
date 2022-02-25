@@ -30,7 +30,6 @@ const approvalsValidationSchema = asyncValidator([
       }
     },
     amount: {
-      toInt: true,
       ...checkIsNumeric
     }
   })

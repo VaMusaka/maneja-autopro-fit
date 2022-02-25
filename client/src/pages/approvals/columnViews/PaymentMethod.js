@@ -37,7 +37,7 @@ const PaymentMethod = forwardRef((props, ref) => {
             )}
             {payment.cheque > 0 && (
                 <Chip
-                    icon={<MuiIcon name={'PriseCheck'} />}
+                    icon={<MuiIcon name={'PriceCheck'} />}
                     variant="outlined"
                     color={'primary'}
                     size={'small'}

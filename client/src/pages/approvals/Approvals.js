@@ -114,6 +114,7 @@ const Approvals = () => {
 
             return approval
         })
+
         setApprovals(updatedApprovals)
     }
 

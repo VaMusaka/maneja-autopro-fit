@@ -51,6 +51,7 @@ export const approvalDetailsColumns = [
         field: 'total',
         headerName: 'Total (+VAT)',
         width: 110,
+        valueFormatter: (params) => params?.data?.total?.toFixed(2),
     },
     {
         field: 'payments.amount',

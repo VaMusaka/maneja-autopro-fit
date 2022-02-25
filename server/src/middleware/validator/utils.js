@@ -1,5 +1,4 @@
 const checkIsNumeric = {
-    toInt: true,
     isNumeric: { option: { no_symbols: true, locale: 'en-GB' } },
     optional: { option: { nullable: true } }
 }
