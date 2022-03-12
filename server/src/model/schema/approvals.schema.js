@@ -17,7 +17,9 @@ const ApprovalsSchema = new Schema({
   },
   reference: {type: String },
   letter: {type: String}
-})
+}, {
+      timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+    })
 
 require('../statics/approvals.static')(ApprovalsSchema)
 

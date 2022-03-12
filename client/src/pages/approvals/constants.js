@@ -114,7 +114,7 @@ export const invoiceDetailsColumns = [
         width: 150,
     },
     {
-        field: 'invoice.total',
+        field: 'invoice.subTotal',
         headerName: 'Amount',
         sortable: true,
         filter: true,
@@ -122,7 +122,7 @@ export const invoiceDetailsColumns = [
         width: 110,
     },
     {
-        field: 'invoiceTotalPaid',
+        field: 'invoice.total',
         headerName: 'Total',
         sortable: true,
         filter: true,

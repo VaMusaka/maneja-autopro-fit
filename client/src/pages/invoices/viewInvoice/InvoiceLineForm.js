@@ -4,7 +4,7 @@ import { MuiTextField, MuiSelectField, MuiCheckbox } from 'components/common'
 import { getInvoiceDepartment } from '../constants'
 import { useDispatch } from 'react-redux'
 import { createInvoiceLineAction } from 'redux/invoices/actions'
-import { CreateInvoiceLineSchema } from 'utils/validation'
+import { InvoiceLineSchema } from 'utils/validation'
 import { Formik, Form } from 'formik'
 import { MuiStyles } from 'theme'
 import clsx from 'clsx'
@@ -63,7 +63,7 @@ const InvoiceLineForm = ({ invoice, services }) => {
                             description: '',
                             addVat: hasVat(),
                         }}
-                        validationSchema={CreateInvoiceLineSchema}
+                        validationSchema={InvoiceLineSchema}
                         onSubmit={(values) => dispatch(createInvoiceLineAction(values))}
                     >
                         {({ errors, values, handleChange, setFieldValue, handleSubmit }) => (

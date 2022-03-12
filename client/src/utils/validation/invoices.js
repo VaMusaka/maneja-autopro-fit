@@ -8,7 +8,7 @@ export const InvoiceValidationSchema = Yup.object().shape({
     repairNotes: Yup.string(),
 })
 
-export const CreateInvoiceLineSchema = Yup.object().shape({
+export const InvoiceLineSchema = Yup.object().shape({
     service: Yup.string().required('Select Invoice Line Service'),
     description: Yup.string(),
     charged: Yup.number(),

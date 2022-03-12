@@ -3,7 +3,7 @@ import { Box, Button, Divider, Grid, Typography } from '@mui/material'
 import { MuiTextField, MuiSelectField, MuiCheckbox } from 'components/common'
 import { getQuoteDepartment } from '../constants'
 import { useDispatch } from 'react-redux'
-import { CreateInvoiceLineSchema } from 'utils/validation'
+import { InvoiceLineSchema } from 'utils/validation'
 import { Formik, Form } from 'formik'
 import { MuiStyles } from 'theme'
 import clsx from 'clsx'
@@ -73,7 +73,7 @@ const UpdateQuoteLineForm = ({ quote, quoteLines, services, initialValues }) => 
                 <Grid item xs={12}>
                     <Formik
                         initialValues={initialValues}
-                        validationSchema={CreateInvoiceLineSchema}
+                        validationSchema={InvoiceLineSchema}
                         onSubmit={handleUpdateQuoteLines}
                     >
                         {({ errors, values, handleChange, setFieldValue, handleSubmit }) => (

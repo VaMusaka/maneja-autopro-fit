@@ -3,7 +3,7 @@ import { Box, Button, Divider, Grid, Typography } from '@mui/material'
 import { MuiTextField, MuiSelectField, MuiCheckbox } from 'components/common'
 import { getInvoiceDepartment } from '../constants'
 import { useDispatch } from 'react-redux'
-import { CreateInvoiceLineSchema } from 'utils/validation'
+import { InvoiceLineSchema } from 'utils/validation'
 import { Formik, Form } from 'formik'
 import { MuiStyles } from 'theme'
 import clsx from 'clsx'
@@ -71,7 +71,7 @@ const UpdateInvoiceLineForm = ({ invoice, invoiceLines, services, initialValues 
                 <Grid item xs={12}>
                     <Formik
                         initialValues={initialValues}
-                        validationSchema={CreateInvoiceLineSchema}
+                        validationSchema={InvoiceLineSchema}
                         onSubmit={handleUpdateInvoiceLines}
                     >
                         {({ errors, values, handleChange, setFieldValue, handleSubmit }) => (
@@ -135,7 +135,7 @@ const UpdateInvoiceLineForm = ({ invoice, invoiceLines, services, initialValues 
                                     type="submit"
                                     fullWidth
                                 >
-                                    Create Invoice Line
+                                    Update Invoice Line
                                 </Button>
                             </Form>
                         )}

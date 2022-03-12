@@ -2,11 +2,7 @@ import { SignInSchema, RequestPasswordResetSchema, ResetPasswordSchema } from '.
 import { InviteUserSchema } from './users'
 import { CustomerValidationSchema } from './customers'
 import { SupplierValidationSchema } from './suppliers'
-import {
-    InvoiceValidationSchema,
-    CreateInvoiceLineSchema,
-    CreateInvoicePaymentSchema,
-} from './invoices'
+import { InvoiceValidationSchema, InvoiceLineSchema, CreateInvoicePaymentSchema } from './invoices'
 import { PurchaseValidationSchema } from './purchases'
 import { CreatePurchaseCategorySchema } from './purchaseCategories'
 import { CreateServiceSchema } from './services'
@@ -24,7 +20,7 @@ export {
     PurchaseValidationSchema,
     CreatePurchaseCategorySchema,
     CreateServiceSchema,
-    CreateInvoiceLineSchema,
+    InvoiceLineSchema,
     CreateInvoicePaymentSchema,
     ProductValidationSchema,
     CreateTransactionSchema,

@@ -4,7 +4,7 @@ import { MuiTextField, MuiSelectField, MuiCheckbox } from 'components/common'
 import { getQuoteDepartment } from '../constants'
 import { useDispatch } from 'react-redux'
 import { createQuoteLineAction } from 'redux/quotes/actions'
-import { CreateInvoiceLineSchema } from 'utils/validation'
+import { InvoiceLineSchema } from 'utils/validation'
 import { Formik, Form } from 'formik'
 import { MuiStyles } from 'theme'
 import clsx from 'clsx'
@@ -71,7 +71,7 @@ const QuoteLineForm = ({ quote, services }) => {
                             description: '',
                             addVat,
                         }}
-                        validationSchema={CreateInvoiceLineSchema}
+                        validationSchema={InvoiceLineSchema}
                         onSubmit={(values) => dispatch(createQuoteLineAction(values))}
                     >
                         {({ errors, values, handleChange, setFieldValue, handleSubmit }) => (

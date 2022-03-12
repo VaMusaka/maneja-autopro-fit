@@ -1,10 +1,15 @@
-const { body, checkSchema } = require('express-validator')
+const { body, checkSchema, check} = require('express-validator')
+const {phone} = require("phone");
 const asyncValidator = require('./async.validator')
+const {isUkPhone} = require("../../utils");
 
 const validateCreateSupplier = asyncValidator([
     body('name').isString().exists().isLength({ min: 3, max: 32 }),
     body('town').isString(),
-    body('phone').isMobilePhone('en-GB')
+    check('phone').custom((value) => {
+        const { isValid } = phone(value, { country: 'GB' })
+        return isValid || isUkPhone(value)
+    })
 ])
 
 const supplierValidationSchema = asyncValidator([
@@ -35,8 +40,13 @@ const supplierValidationSchema = asyncValidator([
             }
         },
         phone: {
-            escape: true,
-            isMobilePhone: { options: 'en-GB' },
+            custom: {
+                options: (value) => {
+                    const { isValid } = phone(value, { country: 'GB' })
+                    return isValid || isUkPhone(value)
+                }
+            },
+
             optional: { options: { nullable: true } }
         }
     })
