@@ -39,6 +39,8 @@ const Create = ({ invoice, product }) => {
                     invoice: invoice?._id,
                     product: product?._id,
                     invoicedTo: companyDetails.name,
+                    pdfName: '',
+                    pdfPageNumber: 1,
                     warranty: '30 Days',
                     details: '',
                     paid: false,

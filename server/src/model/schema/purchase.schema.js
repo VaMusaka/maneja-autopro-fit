@@ -4,6 +4,8 @@ const { Schema, model, ObjectId } = require('mongoose')
 const PurchaseSchema = new Schema(
     {
         paid: { type: Boolean, default: false },
+        pdfName: { type: String },
+        pdfPageNumber: { type : Number, default: 1 },
         invoicedTo: { type: String, default: 'AutoPro Fit' },
         warranty: { type: String, default: '30 Days' },
         details: { type: String, required: true },

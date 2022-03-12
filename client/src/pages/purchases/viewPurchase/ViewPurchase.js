@@ -22,6 +22,8 @@ const ViewPurchase = ({ purchase }) => {
             <BasicInfoGrid
                 data={[
                     { title: 'Invoice #', info: purchase.invoice.autoId },
+                    { title: 'PDF Name', info: purchase?.pdfName },
+                    { title: 'PDF Number', info: purchase?.pdfPageNumber },
                     { title: 'Description', info: purchase.details },
                     { title: 'Supplier', info: purchase.supplier.name },
                     { title: 'Purchase Category', info: purchase.purchaseCategory.name },

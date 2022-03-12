@@ -32,6 +32,8 @@ const DeletePurchase = ({ purchase }) => {
                 <BasicInfoGrid
                     data={[
                         { title: 'Invoiced TO', info: purchase.name },
+                        { title: 'PDF Name', info: purchase?.pdfName },
+                        { title: 'PDF Number', info: purchase?.pdfPageNumber },
                         { title: 'Invoice #', info: purchase?.invoice?.autoId },
                         { title: 'Description', info: purchase.details },
                         { title: 'Supplier', info: purchase.supplier.name },

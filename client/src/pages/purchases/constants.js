@@ -55,6 +55,18 @@ export const purchaseFormFields = (suppliers, purchaseCategories) => {
         },
         {
             component: 'MuiTextField',
+            name: 'pdfName',
+            label: 'PDF Name',
+            size: { sm: 6, md: 6 },
+        },
+        {
+            component: 'MuiTextField',
+            name: 'pdfPageNumber',
+            label: 'Page No',
+            size: { sm: 6, md: 6 },
+        },
+        {
+            component: 'MuiTextField',
             name: 'details',
             multiline: true,
             rows: 2,
