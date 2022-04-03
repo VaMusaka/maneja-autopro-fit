@@ -65,8 +65,9 @@ const validateResetPassword = asyncValidator([
         .escape()
         .isAlphanumeric()
         .custom(
-            async (value, { req }) =>
-                await User.validateResetPasswordToken(req.body.email, value)
+            async (value, { req }) => {
+                return await User.validateResetPasswordToken(req.body.email, value)
+            }
         )
         .withMessage('Invalid token'),
     emailCheck(),
