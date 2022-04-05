@@ -47,7 +47,7 @@ const Update = ({ invoice }) => {
                 }}
                 validationSchema={InvoiceValidationSchema}
                 submitButtonText="Update Invoice"
-                formFields={invoiceFormFields(customers)}
+                formFields={invoiceFormFields(customers, true)}
                 handleSubmit={(values) => {
                     dispatch(updateInvoiceAction(values, history))
                 }}

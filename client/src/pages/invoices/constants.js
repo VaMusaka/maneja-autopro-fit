@@ -155,14 +155,14 @@ export const invoiceLineTableColumns = [
     },
 ]
 
-export const invoiceFormFields = (customers) => {
+export const invoiceFormFields = (customers, isEdit = false) => {
     return [
         {
             component: 'MuiSelectField',
             name: 'department',
             label: 'Invoice Department',
             options: makeDropDownOptions(companyDetails.departments, 'name', 'name'),
-            disabled: !invoiceSettings.useDepartments,
+            disabled: !invoiceSettings.useDepartments || isEdit,
         },
         {
             component: 'MuiTextField',
