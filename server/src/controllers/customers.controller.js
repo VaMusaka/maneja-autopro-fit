@@ -52,7 +52,7 @@ const updateCustomer = async (req, res) =>
 
 const deleteCustomer = async (req, res) => {
     try {
-        const customer = await Customer.find(req.params.id).populate('invoices')
+        const customer = await Customer.find({id: req.params.id}).populate('invoices')
 
         if (!customer) {
             const { output } = badRequest()
@@ -71,6 +71,7 @@ const deleteCustomer = async (req, res) => {
         await Customer.findByIdAndDelete(req.params.id)
         return res.status(204).json()
     } catch (error) {
+        console.log(error)
         const { output } = badRequest()
         return res.status(output.statusCode).json(output)
     }

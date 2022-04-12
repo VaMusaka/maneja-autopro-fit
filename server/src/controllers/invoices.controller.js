@@ -18,7 +18,7 @@ const addInvoiceLine = async (req, res) => {
 
     const invoiceLine = {
         service: Types.ObjectId(service),
-        charged: parseInt(charged),
+        charged: parseFloat(charged),
         description,
         addVat
     }
@@ -42,9 +42,9 @@ const addInvoicePayments = async (req, res) => {
         const { id } = req.params
         const { card, cheque, cash } = req.body
         const payments = {
-            card: parseInt(card),
-            cheque: parseInt(cheque),
-            cash: parseInt(cash)
+            card: parseFloat(card),
+            cheque: parseFloat(cheque),
+            cash: parseFloat(cash)
         }
 
         return getRestResponse(

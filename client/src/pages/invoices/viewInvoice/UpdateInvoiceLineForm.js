@@ -47,7 +47,7 @@ const UpdateInvoiceLineForm = ({ invoice, invoiceLines, services, initialValues 
         const lines = invoiceLines?.map((line) => {
             if (line?._id === values?._id) {
                 delete values._id
-                values.charged = parseInt(values.charged)
+                values.charged = parseFloat(values.charged)
                 return values
             }
 

@@ -1,5 +1,5 @@
 const checkIsNumeric = {
-    isNumeric: { option: { no_symbols: true, locale: 'en-GB' } },
+    isNumeric: { option: { no_symbols: false, locale: 'en-GB' } },
     optional: { option: { nullable: true } }
 }
 

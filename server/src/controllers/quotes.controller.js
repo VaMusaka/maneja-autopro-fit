@@ -27,7 +27,7 @@ const addQuoteLine = async (req, res) => {
 
     const quoteLine = {
         service: Types.ObjectId(service),
-        charged: parseInt(charged),
+        charged: parseFloat(charged),
         description,
         addVat
     }
