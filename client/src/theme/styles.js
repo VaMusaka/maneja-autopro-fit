@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
         height: 67,
         justifyContent: 'center',
         [theme.breakpoints.up('md')]: {
-            marginRight: '20px !important',
-            borderRadius: '10px !important',
+            marginRight: theme.spacing(3),
+            borderRadius: theme.spacing(2),
             top: theme.spacing(1),
         },
     },
@@ -33,16 +33,22 @@ const useStyles = makeStyles((theme) => ({
     },
     styledMenuBar: {
         [theme.breakpoints.up('md')]: {
-            borderRadius: theme.spacing(2),
+            borderTopLeftRadius: theme.spacing(2),
+            borderTopRightRadius: theme.spacing(2),
             left: theme.spacing(3),
             top: theme.spacing(1),
-            // border: 'none !important',
+            border: `solid ${theme.palette.primary.main} !important `,
         },
     },
     styledSelectedMenuItem: {
         backgroundColor: '#F4F4F5 !important',
+        borderTopLeftRadius: theme.spacing(5),
+        borderBottomLeftRadius: theme.spacing(5),
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
+        color: theme.palette.primary.main,
+        textTransform: 'uppercase',
+        fontWeight: 900,
     },
     layoutContainer: {
         marginTop: theme.spacing(2) * 4,
