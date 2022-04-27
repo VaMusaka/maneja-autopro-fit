@@ -89,7 +89,7 @@ export const miniInvoiceTableColumns = [
     },
     {
         name: 'Invoice Total',
-        selector: (row) => row.total,
+        selector: (row) => row?.total?.toFixed(2),
         sortable: true,
     },
     {
