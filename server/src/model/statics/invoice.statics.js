@@ -202,7 +202,7 @@ module.exports = function (InvoiceSchema) {
                 invoice: _id,
                 department,
                 date: dayjs(invoiceDate).format('YYYY-MM-DD'),
-                reference: dayjs(invoiceDate).format('YYYYMMDD')
+                reference: dayjs(invoiceDate).format('YYMMDD')
             })
 
             await approval.save()
