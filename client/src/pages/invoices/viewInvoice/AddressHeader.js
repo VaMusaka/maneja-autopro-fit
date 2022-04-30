@@ -5,7 +5,7 @@ import { getInvoiceDepartment } from '../constants'
 import PropTypes from 'prop-types'
 
 const AddressHeader = ({ invoice }) => {
-    const [department, setDepartment] = useState(null)
+    const [department, setDepartment] = useState({})
 
     useEffect(() => {
         setDepartment(getInvoiceDepartment(invoice))
@@ -28,12 +28,7 @@ const AddressHeader = ({ invoice }) => {
             </Grid>
             <Grid item xs={12} sm={6} flexDirection={'column'} display={'flex'}>
                 <Typography variant="subtitle1">FROM</Typography>
-                <Typography variant={'body1'}>
-                    {companyDetails.name}
-                    {department?.showOnInvoice &&
-                        department?.showOnInvoice &&
-                        `- ${invoice.department}`}
-                </Typography>
+                <Typography variant={'body1'}>{department?.displayName}</Typography>
                 <Typography variant={'body1'}>{companyDetails.address.line1}</Typography>
                 <Typography variant={'body1'}>{companyDetails.address.line2}</Typography>
                 <Typography variant={'body1'}>{companyDetails.address.city}</Typography>

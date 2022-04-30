@@ -62,7 +62,7 @@ const InvoiceTable = () => {
             <Box p={3}>
                 <Box className={classes.pb2}>
                     <Grid container spacing={1}>
-                        <Grid item xs={6} sm={9}>
+                        <Grid item xs={6} sm={8}>
                             <Box width={'100%'}>
                                 <MuiSearchBar
                                     placeholder={'Search Invoice # | Vehicle Model - Reg'}
@@ -71,7 +71,7 @@ const InvoiceTable = () => {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item xs={6} sm={3}>
+                        <Grid item xs={6} sm={4}>
                             <ToggleButtonGroup
                                 onChange={handlePaymentFilter}
                                 fullWidth

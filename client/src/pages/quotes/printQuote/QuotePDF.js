@@ -17,7 +17,7 @@ Font.register({
 //
 const QuotePdfDoc = ({ quote }) => {
     const [logo, setLogo] = useState(null)
-    const [department, setDepartment] = useState(null)
+    const [department, setDepartment] = useState({})
 
     useEffect(() => {
         const quoteDepartment = getQuoteDepartment(quote)
@@ -58,11 +58,8 @@ const QuotePdfDoc = ({ quote }) => {
                 <Box style={styles.w3}>{logo && <Image src={logo} style={styles.image} />}</Box>
                 <Box>
                     <Text style={styles.text}>
-                        {companyDetails.name} {'\n'}
-                        {department?.showOnInvoice &&
-                            department?.showOnInvoice &&
-                            `${quote?.department} \n`}
-                        {companyDetails.address.line1}
+                        {department?.displayName} {'\n'}
+                        {companyDetails.address.line1} {'\n'}
                         {companyDetails.address.line2} {'\n'}
                         {companyDetails.address.city} {'\n'}
                         {companyDetails.address.postalCode} {'\n'}

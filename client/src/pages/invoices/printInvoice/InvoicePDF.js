@@ -16,7 +16,7 @@ Font.register({
 // Create styles
 const InvoicePdfDoc = ({ invoice }) => {
     const [logo, setLogo] = useState(null)
-    const [department, setDepartment] = useState(null)
+    const [department, setDepartment] = useState({})
 
     useEffect(() => {
         const invoiceDepartment = getInvoiceDepartment(invoice)
@@ -57,11 +57,8 @@ const InvoicePdfDoc = ({ invoice }) => {
                 <Box style={styles.w3}>{logo && <Image src={logo} style={styles.image} />}</Box>
                 <Box>
                     <Text style={styles.text}>
-                        {companyDetails.name} {'\n'}
-                        {department?.showOnInvoice &&
-                            department?.showOnInvoice &&
-                            `${invoice?.department} \n`}
-                        {companyDetails.address.line1}
+                        {department.displayName} {'\n'}
+                        {companyDetails.address.line1} {'\n'}
                         {companyDetails.address.line2} {'\n'}
                         {companyDetails.address.city} {'\n'}
                         {companyDetails.address.postalCode} {'\n'}

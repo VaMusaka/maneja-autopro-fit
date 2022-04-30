@@ -22,10 +22,7 @@ const AddressHeader = ({ quote }) => {
             </Grid>
             <Grid item xs={12} sm={6} flexDirection={'column'} display={'flex'}>
                 <Typography variant="subtitle1">FROM</Typography>
-                <Typography variant={'body1'}>
-                    {companyDetails.name}
-                    {department?.showOnQuote && department?.showOnQuote && `- ${quote.department}`}
-                </Typography>
+                <Typography variant={'body1'}>{department?.displayName}</Typography>
                 <Typography variant={'body1'}>{companyDetails.address.line1}</Typography>
                 <Typography variant={'body1'}>{companyDetails.address.line2}</Typography>
                 <Typography variant={'body1'}>{companyDetails.address.city}</Typography>

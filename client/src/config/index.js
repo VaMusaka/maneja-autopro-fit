@@ -12,6 +12,7 @@ export const companyDetails = {
     departments: [
         {
             name: 'AutoPro Fit',
+            displayName: 'AutoPro Fit Ltd',
             logo: 'https://maneja-assets.s3.eu-west-2.amazonaws.com/appLogo.jpeg',
             showOnInvoice: true,
             invoicesVatExempt: false,
@@ -29,6 +30,7 @@ export const companyDetails = {
         },
         {
             name: 'MOT',
+            displayName: 'MOTS Testing Ltd',
             logo: 'https://maneja-assets.s3.eu-west-2.amazonaws.com/motLogo.png',
             showOnInvoice: true,
             invoicesVatExempt: true,
