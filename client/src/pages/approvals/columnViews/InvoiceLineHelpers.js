@@ -23,17 +23,17 @@ InvoiceLineVat.propTypes = {
 
 // eslint-disable-next-line react/display-name
 const InvoiceLineTotal = forwardRef(({ data, value }, ref) => {
-    const [vat, setVat] = useState(data.addVat ? value * 1.2 : 0.0)
+    const [vat, setVat] = useState(data.addVat ? value * 1.2 : value)
 
     useImperativeHandle(ref, () => {
         return {
             refresh({ data, value }) {
-                setVat(data.addVat ? value * 1.2 : 0.0)
+                setVat(data.addVat ? value * 1.2 : value)
             },
         }
     })
 
-    return <div>{vat.toFixed(2)}</div>
+    return <div>£ {vat.toFixed(2)}</div>
 })
 
 InvoiceLineTotal.propTypes = {
