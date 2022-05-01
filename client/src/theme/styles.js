@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
     },
     styledSelectedMenuItem: {
         backgroundColor: '#F4F4F5 !important',
-        borderTopLeftRadius: theme.spacing(5),
-        borderBottomLeftRadius: theme.spacing(5),
+        // borderTopLeftRadius: theme.spacing(5),
+        // borderBottomLeftRadius: theme.spacing(5),
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
         color: theme.palette.primary.main,

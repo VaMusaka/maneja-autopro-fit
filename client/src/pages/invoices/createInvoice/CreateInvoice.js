@@ -5,12 +5,13 @@ import { customersSelector } from 'redux/selectors'
 import { createInvoiceAction } from 'redux/invoices/actions'
 import { InvoiceValidationSchema } from 'utils/validation'
 import { FormBuilder } from 'components/common'
-import { invoiceFormFields } from 'pages/invoices/constants'
+import { createInvoiceInitialValues, invoiceFormFields } from 'pages/invoices/constants'
 import { getCustomersAction } from 'redux/customers/actions'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { companyDetails } from 'config'
 
 const Create = () => {
+    const { pathname } = useLocation()
     const history = useHistory()
     const dispatch = useDispatch()
     const CUSTOMERS = useSelector(customersSelector)
@@ -22,7 +23,6 @@ const Create = () => {
         if (!customers) {
             dispatch(getCustomersAction())
         }
-
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -30,20 +30,25 @@ const Create = () => {
         return 'LOADING'
     }
 
+    const department = () => {
+        if (pathname === '/invoices') {
+            return companyDetails.departments[0].name
+        }
+
+        return companyDetails.departments[1].name
+    }
+
     return (
         <Box p={1}>
             <FormBuilder
                 title="Create Invoice"
                 initialValues={{
-                    customer: '',
-                    vehicleModel: '',
-                    vehicleRed: '',
-                    repairNotes: '',
-                    department: companyDetails.departments[0].name,
+                    ...createInvoiceInitialValues,
+                    department: department(),
                 }}
                 validationSchema={InvoiceValidationSchema}
                 submitButtonText="Create Invoice"
-                formFields={invoiceFormFields(customers)}
+                formFields={invoiceFormFields(customers, pathname)}
                 handleSubmit={(values) => {
                     dispatch(createInvoiceAction(values, history))
                 }}

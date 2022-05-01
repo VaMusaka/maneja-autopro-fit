@@ -8,26 +8,24 @@ const MenuDrawer = ({ window, drawerWidth, mobileOpen, handleDrawerToggle, isDes
     const classes = MuiStyles()
     const container = window !== undefined ? () => window().document.body : undefined
     return (
-        <>
-            <Drawer
-                container={container}
-                classes={{
-                    paper: classes.styledMenuBar,
-                }}
-                variant={isDesktop ? 'permanent' : 'temporary'}
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
-                }}
-                sx={{
-                    display: { xs: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                }}
-            >
-                <AppMenu />
-            </Drawer>
-        </>
+        <Drawer
+            container={container}
+            classes={{
+                paper: classes.styledMenuBar,
+            }}
+            variant={isDesktop ? 'permanent' : 'temporary'}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+                display: { xs: 'block' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+        >
+            <AppMenu />
+        </Drawer>
     )
 }
 

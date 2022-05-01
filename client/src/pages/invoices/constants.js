@@ -38,6 +38,13 @@ PaidInFull.propTypes = {
     total: PropTypes.number,
 }
 
+export const createInvoiceInitialValues = {
+    customer: '',
+    vehicleModel: '',
+    vehicleRed: '',
+    repairNotes: '',
+}
+
 export const invoiceTableColumns = [
     {
         name: 'Invoice No',
@@ -155,14 +162,14 @@ export const invoiceLineTableColumns = [
     },
 ]
 
-export const invoiceFormFields = (customers, isEdit = false) => {
+export const invoiceFormFields = (customers, pathname, isEdit = false) => {
     return [
         {
             component: 'MuiSelectField',
             name: 'department',
             label: 'Invoice Department',
             options: makeDropDownOptions(companyDetails.departments, 'name', 'name'),
-            disabled: !invoiceSettings.useDepartments || isEdit,
+            disabled: !invoiceSettings.useDepartments || isEdit || pathname === '/invoices/mot',
         },
         {
             component: 'MuiTextField',
