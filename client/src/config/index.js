@@ -13,6 +13,7 @@ export const companyDetails = {
         {
             name: 'AutoPro Fit',
             displayName: 'AutoPro Fit Ltd',
+            defaultServiceId: '615f23ebb8720fd0a1f5a874',
             logo: 'https://maneja-assets.s3.eu-west-2.amazonaws.com/appLogo.jpeg',
             showOnInvoice: true,
             invoicesVatExempt: false,
@@ -31,6 +32,7 @@ export const companyDetails = {
         {
             name: 'MOT',
             displayName: 'MOTS Testing Ltd',
+            defaultServiceId: '615f23d32644b6080380bb97',
             logo: 'https://maneja-assets.s3.eu-west-2.amazonaws.com/motLogo.png',
             showOnInvoice: true,
             invoicesVatExempt: true,

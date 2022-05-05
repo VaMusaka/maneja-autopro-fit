@@ -8,6 +8,7 @@ import {
     createInvoicePayments,
     searchInvoice,
     updateInvoiceLines,
+    createMotInvoice,
 } from 'api/invoices'
 
 import { getInvoiceStatsByMonth, getInvoiceStatsByYear, getInvoicesByDate } from 'api/dataService'
@@ -88,24 +89,29 @@ export const getInvoicesByYearAction = () => async (dispatch) => {
     }
 }
 
-export const createInvoiceAction = (invoice, history) => async (dispatch, getState) => {
-    dispatch(setInvoicesLoadingAction())
-    try {
-        const { data } = await createInvoice(invoice)
-        const { invoices, layout } = getState().INVOICES
+export const createInvoiceAction =
+    (invoice, history, isMotInvoice = false) =>
+    async (dispatch, getState) => {
+        dispatch(setInvoicesLoadingAction())
+        try {
+            const { data } = isMotInvoice ? await createMotInvoice(invoice) : createInvoice(invoice)
+            const { invoices, layout } = getState().INVOICES
 
-        invoices.push(data)
+            invoices.push(data)
 
-        dispatch({ type: GET_INVOICES, payload: invoices })
-        dispatch({ type: UPDATE_INVOICES_LAYOUT, payload: { ...layout, openCreateDrawer: false } })
-        history.push(`/invoices/${data._id}/view`)
+            dispatch({ type: GET_INVOICES, payload: invoices })
+            dispatch({
+                type: UPDATE_INVOICES_LAYOUT,
+                payload: { ...layout, openCreateDrawer: false },
+            })
+            history.push(`/invoices/${data._id}/view`)
 
-        toast.success('Invoice created successfully')
-    } catch (error) {
-        toast.error('Error creating invoice')
-        dispatch(setInvoicesErrorsAction(error))
+            toast.success('Invoice created successfully')
+        } catch (error) {
+            toast.error('Error creating invoice')
+            dispatch(setInvoicesErrorsAction(error))
+        }
     }
-}
 
 export const updateInvoiceAction = (invoice) => async (dispatch, getState) => {
     dispatch(setInvoicesLoadingAction())

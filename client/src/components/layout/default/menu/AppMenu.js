@@ -24,7 +24,7 @@ const AppMenu = () => {
                 <AppLogo />
             </Toolbar>
             <Divider />
-            <List>
+            <List sx={{ pt: 0 }}>
                 {menuItems.map(({ title, icon, path }, index) => (
                     <ListItem
                         dense

@@ -10,6 +10,7 @@ import {
     makeDropDownOptions,
     makeServiceSelectionOptions,
     openTab,
+    getDepartment,
 } from 'utils'
 import MuiPallete from 'theme/palette'
 import { companyDetails, invoiceSettings } from 'config'
@@ -43,6 +44,12 @@ export const createInvoiceInitialValues = {
     vehicleModel: '',
     vehicleRed: '',
     repairNotes: '',
+}
+
+export const createMotInvoiceInitialValues = {
+    charged: 40,
+    cash: 40,
+    service: getDepartment('MOT').defaultServiceId,
 }
 
 export const invoiceTableColumns = [
@@ -119,12 +126,12 @@ export const miniInvoiceTableColumns = [
 export const invoiceLineTableColumns = [
     {
         name: 'Item',
-        selector: (row) => row?.service.title,
+        selector: (row) => row?.service?.title,
         sortable: false,
     },
     {
         name: 'Description',
-        selector: (row) => row?.service.description,
+        selector: (row) => row?.service?.description,
         sortable: false,
     },
     {
@@ -175,11 +182,19 @@ export const invoiceFormFields = (customers, pathname, isEdit = false) => {
             component: 'MuiTextField',
             name: 'vehicleModel',
             label: 'Vehicle Model',
+            size: {
+                sm: 6,
+                md: 6,
+            },
         },
         {
             component: 'MuiTextField',
             name: 'vehicleReg',
             label: 'Vehicle Registration',
+            size: {
+                sm: 6,
+                md: 6,
+            },
         },
         {
             component: 'MuiSelectField',
@@ -198,10 +213,20 @@ export const invoiceFormFields = (customers, pathname, isEdit = false) => {
             name: 'repairNotes',
             label: 'Invoice/Repair/Service Notes',
             multiline: true,
-            rows: 5,
+            rows: 3,
         },
     ]
 }
+
+export const motInvoiceFields = (transactions = []) => [
+    {
+        component: 'MuiTextField',
+        name: 'charged',
+        label: 'MOT Amount',
+        required: true,
+    },
+    ...invoicePaymentsFormFields(transactions),
+]
 
 export const invoiceLineFormFields = (services, department) => {
     return [
@@ -238,21 +263,37 @@ export const invoicePaymentsFormFields = (transactions = []) => {
             component: 'MuiTextField',
             name: 'cash',
             label: 'Cash',
+            size: {
+                sm: 6,
+                md: 6,
+            },
         },
         {
             component: 'MuiTextField',
             name: 'cheque',
             label: 'Cheque',
+            size: {
+                sm: 6,
+                md: 6,
+            },
         },
         {
             component: 'MuiTextField',
             name: 'card',
             label: 'Card',
+            size: {
+                sm: 6,
+                md: 6,
+            },
         },
         {
             component: 'MuiTextField',
             name: 'reference',
             label: 'Reference',
+            size: {
+                sm: 6,
+                md: 6,
+            },
         },
         {
             component: 'MuiSelectField',

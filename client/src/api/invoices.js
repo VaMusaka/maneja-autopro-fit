@@ -21,6 +21,8 @@ export const getInvoice = async (invoice) => await axios.get(`invoices/${invoice
 
 export const createInvoice = async (invoice) => await axios.post('invoices', invoice)
 
+export const createMotInvoice = async (invoice) => await axios.post('invoices/mot', invoice)
+
 export const updateInvoice = async (invoice) => await axios.put(`invoices/${invoice._id}`, invoice)
 
 export const deleteInvoice = async (invoice) => await axios.delete(`invoices/${invoice}`)

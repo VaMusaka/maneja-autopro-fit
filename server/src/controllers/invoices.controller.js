@@ -1,6 +1,8 @@
 const { models, Types } = require('mongoose')
 const { badRequest } = require('@hapi/boom')
 const { getRestResponse } = require('../utils')
+const {checkIsNumeric} = require("../middleware/validator/utils");
+const {toNumber, isNumber, add} = require("lodash");
 
 const { Invoice, Approvals, Purchase, Quote } = models
 
@@ -66,19 +68,19 @@ const addInvoicePayments = async (req, res) => {
     }
 }
 
-const getFilteredInvoices = (async = (filters) =>
+const getFilteredInvoices = async (filters) =>
     Invoice.find(filters)
         .populate('customer')
         .sort({ _id: -1, created: -1, invoiceDate: -1, 'misc.autoId': -1 })
-        .limit(400))
+        .limit(400)
 
 const getInvoices = async (req, res) =>
     getRestResponse(res, await getFilteredInvoices(req.query))
 
 const searchInvoices = async (req, res) => {
-    const searchNum = isNaN(parseInt(req.body.search))
+    const searchNum = isNumber(toNumber(req.body.search))
         ? 0
-        : parseInt(req.body.search)
+        : toNumber(req.body.search)
     const searchRegEx = { $regex: req.body.search, $options: 'i' }
 
     return await getRestResponse(
@@ -108,6 +110,61 @@ const getInvoicesByYear = async (req, res) =>
 const createInvoice = async (req, res) => {
     try {
         const newInvoice = new Invoice(req.body)
+        return getRestResponse(res, await newInvoice.save())
+    } catch (error) {
+        const { output } = badRequest()
+        return res.status(output.statusCode).json(output)
+    }
+}
+
+const getAmountPaid = (payment) => {
+    const cash = isNumber(toNumber(payment?.cash)) ? toNumber(payment?.cash) : 0
+    const card = isNumber(toNumber(payment?.card)) ? toNumber(payment?.card) : 0
+    const cheque = isNumber(toNumber(payment?.cheque)) ? toNumber(payment?.cheque) : 0
+
+    const total = add(add(card, cheque), cash)
+
+    return toNumber(total)
+}
+
+const createMotInvoice = async (req, res) => {
+    try{
+        const {
+            customer, vehicleModel, vehicleReg, repairNotes, invoiceDate,
+            service, charged, cash, card, cheque, transaction, reference
+        } = req.body
+
+        const paidInFull = toNumber(charged) <= getAmountPaid({cash, card, cheque})
+        const balancePayable = toNumber(charged) - getAmountPaid({cash, card, cheque}) || 0
+        console.log(balancePayable)
+
+
+        const newInvoice = new Invoice(
+            {
+                department: 'MOT',
+                subTotal: charged,
+                total: charged,
+                balancePayable,
+                customer, vehicleModel, vehicleReg, repairNotes, invoiceDate,
+                lines: [{
+                    service,
+                    charged: charged || 40,
+                    description: 'Ministry of transport Test (MOT)',
+                    addVat: false
+                }],
+                payments: {
+                    cash,
+                    card,
+                    cheque,
+                    paidInFull,
+                    transaction,
+                    reference
+                }
+            }
+        )
+
+
+
         return getRestResponse(res, await newInvoice.save())
     } catch (error) {
         console.log(error)
@@ -200,6 +257,7 @@ module.exports = {
     getInvoices,
     getInvoice,
     createInvoice,
+    createMotInvoice,
     updateInvoice,
     updateInvoicePayments,
     getInvoicesByMonth,
