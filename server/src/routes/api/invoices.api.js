@@ -2,6 +2,7 @@ const express = require('express')
 const jwtAuth = require('../../middleware/auth/jwtAuth')
 const {
     validateCreateInvoice,
+    validateCreateMotInvoice,
     invoiceValidationSchema,
     invoicePaymentsValidationSchema,
     invoiceLinesValidationSchema,
@@ -10,6 +11,7 @@ const {
 const {
     addInvoiceLine,
     createInvoice,
+    createMotInvoice,
     updateInvoice,
     updateInvoicePayments,
     addInvoicePayments,
@@ -51,6 +53,7 @@ router.post('/search', [jwtAuth], searchInvoices)
 router.patch('/bulk-review', [jwtAuth], reviewBulkInvoices)
 
 router.post('/', [jwtAuth, validateCreateInvoice], createInvoice)
+router.post('/mot', [jwtAuth, validateCreateMotInvoice], createMotInvoice)
 router.delete('/:id', [jwtAuth], deleteInvoice)
 
 module.exports = router

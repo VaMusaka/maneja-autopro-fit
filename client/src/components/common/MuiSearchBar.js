@@ -19,6 +19,8 @@ const MuiSearchBar = ({ placeholder, handleSearch, handleClear }) => {
     return (
         <Paper
             component="form"
+            variant={'outlined'}
+            elevation={0}
             sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%' }}
         >
             <InputBase

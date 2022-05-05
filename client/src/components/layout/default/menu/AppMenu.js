@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, useRouteMatch } from 'react-router-dom'
+import { useRouteMatch, useLocation, useHistory } from 'react-router-dom'
 import { Toolbar, Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { menuItems } from './constants'
 import { MuiIcon, AppLogo } from 'components/common'
@@ -9,6 +9,14 @@ const AppMenu = () => {
     const history = useHistory()
     const classes = MuiStyles()
     const match = useRouteMatch()
+    const location = useLocation()
+    const { pathname } = location
+
+    const isSelected = (path) => {
+        if (path === pathname || path === match.path) {
+            return true
+        }
+    }
 
     return (
         <div>
@@ -16,14 +24,14 @@ const AppMenu = () => {
                 <AppLogo />
             </Toolbar>
             <Divider />
-            <List>
+            <List sx={{ pt: 0 }}>
                 {menuItems.map(({ title, icon, path }, index) => (
                     <ListItem
                         dense
                         button
                         key={index}
                         onClick={() => history.push(path)}
-                        selected={match.path === path}
+                        selected={isSelected(path)}
                         classes={{ selected: classes.styledSelectedMenuItem }}
                     >
                         <ListItemIcon>

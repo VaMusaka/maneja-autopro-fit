@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Paper, Grid, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { Box, Paper, Grid, ToggleButton, ToggleButtonGroup, Tab, Tabs } from '@mui/material'
 import DataTable from 'react-data-table-component'
 import { useSelector, useDispatch } from 'react-redux'
 import { invoicesSelector } from 'redux/selectors'
@@ -9,30 +9,45 @@ import { MuiDrawer, MuiSearchBar } from 'components/common'
 import CreateInvoice from 'pages/invoices/createInvoice'
 import { toggleCreateDrawer } from 'utils'
 import InvoiceTableExpandableRow from './InvoiceTableExpandableRow'
+import { useLocation, useHistory } from 'react-router-dom'
+
 import { MuiStyles } from 'theme'
 import { isEmpty } from 'lodash'
 
 const InvoiceTable = () => {
+    const { pathname } = useLocation()
+    const history = useHistory()
+
     const [tableTitle, setTableTitle] = useState(`INVOICES`)
+    const [selectedTab, setSelectedTab] = useState(pathname)
     const [invoicePaymentStatus, setInvoicePaymentStatus] = useState('all')
     const classes = MuiStyles()
     const [drawerOpen, setDrawerOpen] = useState(false)
     const dispatch = useDispatch()
     const { invoices, loading, layout } = useSelector(invoicesSelector)
 
-    const getInvoices = () => dispatch(getInvoicesAction())
+    const baseFilter = pathname === '/invoices/mot' ? { department: 'MOT' } : {}
+
+    const getInvoices = () => dispatch(getInvoicesAction(baseFilter))
 
     useEffect(() => {
-        getInvoices()
+        getInvoices(baseFilter)
+        setSelectedTab(pathname)
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    useEffect(() => {
+        getInvoices(baseFilter)
+        // eslint-disable-next-line
+    }, [pathname])
 
     useEffect(() => {
         setDrawerOpen(layout.openCreateDrawer)
     }, [layout.openCreateDrawer])
 
     const handleClearSearch = () => {
-        dispatch(getInvoicesAction())
+        dispatch(getInvoicesAction(baseFilter))
         setTableTitle('INVOICES')
     }
 
@@ -40,7 +55,7 @@ const InvoiceTable = () => {
         if (isEmpty(search)) {
             handleClearSearch()
         } else {
-            dispatch(searchInvoiceAction({ search }))
+            dispatch(searchInvoiceAction({ ...baseFilter, search }))
             setTableTitle('SEARCH RESULTS')
         }
     }
@@ -49,17 +64,40 @@ const InvoiceTable = () => {
         setInvoicePaymentStatus(value)
         if (value === 'all') {
             setTableTitle('INVOICES')
-            return dispatch(getInvoicesAction())
+            return dispatch(getInvoicesAction(baseFilter))
         }
 
         const title = value ? 'PAID INVOICES' : 'UNPAID INVOICES'
         setTableTitle(title)
-        return dispatch(getInvoicesAction({ 'payments.paidInFull': value }))
+        return dispatch(getInvoicesAction({ ...baseFilter, 'payments.paidInFull': value }))
+    }
+
+    const handleTabChange = () => {
+        setSelectedTab(pathname)
     }
 
     return (
         <Paper>
             <Box p={3}>
+                <Box sx={{ width: '100%', pb: 3 }}>
+                    <Tabs
+                        value={selectedTab}
+                        onChange={handleTabChange}
+                        aria-label="wrapped label tabs example"
+                    >
+                        <Tab
+                            value="/invoices"
+                            label="ALL INVOICES"
+                            onClick={() => history.push('/invoices')}
+                        />
+                        <Tab
+                            value="/invoices/mot"
+                            label="MOT INVOICES"
+                            onClick={() => history.push('/invoices/mot')}
+                        />
+                    </Tabs>
+                </Box>
+
                 <Box className={classes.pb2}>
                     <Grid container spacing={1}>
                         <Grid item xs={6} sm={8}>

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { BasicInfoGrid } from 'components/common'
 
 const InvoiceTableExpandableRow = ({ data }) => {
-    console.log(data)
     return (
         <Box p={2}>
             <BasicInfoGrid

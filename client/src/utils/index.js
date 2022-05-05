@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { signOutUserAction } from 'redux/authentication/actions'
+import { companyDetails } from 'config'
 
 export const setAuthToken = (token) => {
     if (token) {
@@ -239,3 +240,5 @@ export const makeQueryString = (filters) => {
         .map((key) => key + '=' + filters[key])
         .join('&')
 }
+
+export const getDepartment = (id) => companyDetails.departments.find(({ name }) => name === id)

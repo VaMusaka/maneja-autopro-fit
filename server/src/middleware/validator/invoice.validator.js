@@ -2,12 +2,22 @@ const { body, query, checkSchema } = require('express-validator')
 const asyncValidator = require('./async.validator')
 const { checkIsNumeric, checkIsBoolean } = require('./utils')
 
-const validateCreateInvoice = asyncValidator([
+const createInvoiceFields = [
     body('customer').isMongoId(),
     body('vehicleModel').isString().exists().isLength({ min: 3, max: 64 }),
     body('vehicleReg').isString().exists().isLength({ min: 3, max: 15 }),
     body('repairNotes').isString().escape()
-])
+]
+
+const paymentValidationFields = [
+    checkSchema({
+        cash: checkIsNumeric,
+        card: checkIsNumeric,
+        cheque: checkIsNumeric
+    })
+]
+
+const validateCreateInvoice = asyncValidator(createInvoiceFields)
 
 const invoiceQuerySchema = asyncValidator([
     checkSchema({
@@ -32,13 +42,7 @@ const invoiceLinesValidationSchema = asyncValidator([
     })
 ])
 
-const invoicePaymentsValidationSchema = asyncValidator([
-    checkSchema({
-        cash: checkIsNumeric,
-        card: checkIsNumeric,
-        cheque: checkIsNumeric
-    })
-])
+const invoicePaymentsValidationSchema = asyncValidator(paymentValidationFields)
 
 const invoiceValidationSchema = asyncValidator([
     checkSchema({
@@ -83,10 +87,18 @@ const invoiceValidationSchema = asyncValidator([
     })
 ])
 
+const validateCreateMotInvoice = asyncValidator(
+    [
+        ...createInvoiceFields,
+        ...paymentValidationFields
+    ]
+)
+
 module.exports = {
     validateCreateInvoice,
     invoiceValidationSchema,
     invoiceLinesValidationSchema,
     invoicePaymentsValidationSchema,
-    invoiceQuerySchema
+    invoiceQuerySchema,
+    validateCreateMotInvoice
 }
