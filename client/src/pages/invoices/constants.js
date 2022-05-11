@@ -47,8 +47,10 @@ export const createInvoiceInitialValues = {
 }
 
 export const createMotInvoiceInitialValues = {
-    charged: '',
-    cash: '',
+    charged: 0,
+    cash: 0,
+    cheque: 0,
+    card: 0,
     service: getDepartment('MOT').defaultServiceId,
 }
 

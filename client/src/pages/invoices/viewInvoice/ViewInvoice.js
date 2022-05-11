@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Box, Divider, Paper, Typography } from '@mui/material'
-import { invoicesSelector, servicesSelector } from 'redux/selectors'
+import { invoicesSelector, purchasesSelector, servicesSelector } from 'redux/selectors'
 import { getInvoiceAction } from 'redux/invoices/actions'
 import AddressHeader from './AddressHeader'
 import PricingFooter from './PricingFooter'
@@ -22,11 +22,12 @@ const ViewInvoice = () => {
     const { id } = useParams()
     const INVOICES = useSelector(invoicesSelector)
     const SERVICES = useSelector(servicesSelector)
+    const PURCHASES = useSelector(purchasesSelector)
 
     const { invoice } = INVOICES
     const { services } = SERVICES
 
-    const isLoading = INVOICES.loading || SERVICES.loading
+    const isLoading = INVOICES.loading || SERVICES.loading || PURCHASES.loading
 
     const getDepartmentLogo = () => {
         if (!invoice?.department) {
