@@ -94,7 +94,9 @@ export const createInvoiceAction =
     async (dispatch, getState) => {
         dispatch(setInvoicesLoadingAction())
         try {
-            const { data } = isMotInvoice ? await createMotInvoice(invoice) : createInvoice(invoice)
+            const { data } = isMotInvoice
+                ? await createMotInvoice(invoice)
+                : await createInvoice(invoice)
             const { invoices, layout } = getState().INVOICES
 
             invoices.push(data)
@@ -104,6 +106,7 @@ export const createInvoiceAction =
                 type: UPDATE_INVOICES_LAYOUT,
                 payload: { ...layout, openCreateDrawer: false },
             })
+
             history.push(`/invoices/${data._id}/view`)
 
             toast.success('Invoice created successfully')

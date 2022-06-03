@@ -4,7 +4,7 @@ const { getRestResponse } = require('../utils')
 const {checkIsNumeric} = require("../middleware/validator/utils");
 const {toNumber, isNumber, add} = require("lodash");
 
-const { Invoice, Approvals, Purchase, Quote } = models
+const { Invoice, Approval, Purchase, Quote } = models
 
 const getInvoice = async (req, res) =>
     getRestResponse(
@@ -202,7 +202,7 @@ const deleteInvoice = async (req, res) => {
             const { output } = badRequest()
             return res
                 .status(output.statusCode)
-                .json('Failed to delete invoice')
+                .json('Failed to delete invoice - invoice not found')
         }
 
         // DELETE PURCHASES
@@ -215,12 +215,15 @@ const deleteInvoice = async (req, res) => {
             console.error('Failed to Delete Invoice Quotes', err)
         })
 
-        await Approvals.deleteInvoice({invoice: id}).catch((err) => {
+        await Approval.deleteMany({invoice: id}).catch((err) => {
             console.error('Failed to Delete Invoice Approvals', err)
         })
 
         return res.status(204).json()
     } catch (error) {
+
+        console.log(error)
+
         const { output } = badRequest()
         return res.status(output.statusCode).json(output)
     }
