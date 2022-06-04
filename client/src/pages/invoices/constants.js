@@ -41,6 +41,7 @@ PaidInFull.propTypes = {
 
 export const createInvoiceInitialValues = {
     customer: '',
+    invoiceDate: new Date(),
     vehicleModel: '',
     vehicleRed: '',
     repairNotes: '',
