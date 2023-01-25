@@ -1,6 +1,5 @@
 /.idea
 /server/node_modules
-/server/client
 /client/node_modules
 
 # Elastic Beanstalk Files
